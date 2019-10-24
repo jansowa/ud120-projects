@@ -18,24 +18,21 @@ def calculate_accuracy_for_classifier(features_train, labels_train, features_tes
                                       p=p_default, metric=metric_default, metric_params=metric_params_default,
                                       n_jobs=n_jobs_default,
                                       print_time=False, print_parameters=False, print_accuracy=False):
-    # if metric_params is not None:
-    #     if n_jobs is not None:
-    #         clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
-    #                                    leaf_size=leaf_size, p=p, metric=metric, metric_params=metric_params,
-    #                                    n_jobs=n_jobs)
-    #     else:
-    #         clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
-    #                                    leaf_size=leaf_size, p=p, metric=metric, metric_params=metric_params)
-    # else:
-    #     if n_jobs is not None:
-    #         clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
-    #                                    leaf_size=leaf_size, p=p, metric=metric, n_jobs=n_jobs)
-    #     else:
-    #         clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
-    #                                    leaf_size=leaf_size, p=p, metric=metric)
-
-    clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
-                               leaf_size=leaf_size, p=p, metric=metric)
+    if metric_params is not None:
+        if n_jobs is not None:
+            clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
+                                       leaf_size=leaf_size, p=p, metric=metric, metric_params=metric_params,
+                                       n_jobs=n_jobs)
+        else:
+            clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
+                                       leaf_size=leaf_size, p=p, metric=metric, metric_params=metric_params)
+    else:
+        if n_jobs is not None:
+            clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
+                                       leaf_size=leaf_size, p=p, metric=metric, n_jobs=n_jobs)
+        else:
+            clf = KNeighborsClassifier(n_neighbors=n_neighbors, weights=weights, algorithm=algorithm,
+                                       leaf_size=leaf_size, p=p, metric=metric)
     training_time = time()
     clf.fit(features_train, labels_train)
     if print_time:
@@ -93,14 +90,5 @@ def calculate_best_accuracy_for_neighbors_range(features_train, labels_train, fe
         summary_message += ", n_jobs = " + str(n_jobs)
         print(summary_message)
         print("Executing tests time: " + str(executing_tests_time))
-        # print("Calculating for parameters:")
-        # print("n_neighbors in range: " + str(neighbors_range[0]) + " - " + str(neighbors_range[len(neighbors_range)-1]))
-        # print("weights = " + str(weights))
-        # print("algorithm = " + str(algorithm))
-        # print("leaf_size = " + str(leaf_size))
-        # print("p = " + str(p))
-        # print("metric = " + str(metric))
-        # print("metric_params = " + str(metric_params))
-        # print("n_jobs = " + str(n_jobs))
     print("Best accuracy: " + str(max_accuracy) + " for n_neighbors = " + str(index_with_max_accuracy))
     return max_accuracy, index_with_max_accuracy
