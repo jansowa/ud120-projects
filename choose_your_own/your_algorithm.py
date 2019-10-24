@@ -25,20 +25,20 @@ plt.ylabel("grade")
 plt.show()
 ###############################################################################
 
-from your_algorithm_helper import calculate_best_accuracy_for_neighbors_range
+from kneighbors_algorithm_comparator import calculate_best_accuracy_for_neighbors_range
 
 neighbors_range = range(1, 100)
 calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='distance', print_summary=True)
+                                            weights='distance', print_parameters=True)
 print
 calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', print_summary=True)
+                                            weights='uniform', print_parameters=True)
 print
 calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', algorithm='ball_tree', print_summary=True)
+                                            weights='uniform', algorithm='ball_tree', print_parameters=True)
 print
 calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', algorithm='kd_tree', print_summary=True)
+                                            weights='uniform', algorithm='kd_tree', print_parameters=True)
 print
 calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', algorithm='brute', print_summary=True)
+                                            weights='uniform', algorithm='brute', print_parameters=True)
