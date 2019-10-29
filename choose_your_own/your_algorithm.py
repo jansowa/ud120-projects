@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 import matplotlib.pyplot as plt
+from sklearn.tree import DecisionTreeClassifier
+
 from prep_terrain_data import makeTerrainData
 from class_vis import prettyPicture
 
@@ -26,19 +28,12 @@ plt.show()
 ###############################################################################
 
 from kneighbors_algorithm_comparator import calculate_best_accuracy_for_neighbors_range
+from adaboost_algorithm_comparator import calculate_best_accuracy_for_adaboost_classifier
+from random_forest_comparator import calculate_best_accuracy_for_random_forest_classifier
 
-neighbors_range = range(1, 100)
-calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='distance', print_parameters=True)
-print
-calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
+calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test,
                                             weights='uniform', print_parameters=True)
 print
-calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', algorithm='ball_tree', print_parameters=True)
+calculate_best_accuracy_for_adaboost_classifier(features_train, labels_train, features_test, labels_test, algorithm="SAMME", print_parameters=True)
 print
-calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', algorithm='kd_tree', print_parameters=True)
-print
-calculate_best_accuracy_for_neighbors_range(features_train, labels_train, features_test, labels_test, neighbors_range,
-                                            weights='uniform', algorithm='brute', print_parameters=True)
+calculate_best_accuracy_for_random_forest_classifier(features_train, labels_train, features_test, labels_test, n_estimators_range=range(1, 10), max_feature=1)
